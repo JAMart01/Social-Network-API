@@ -19,7 +19,7 @@ const ReactionSchema = new Schema(
             required: 'Every reaction needs a user to create it! So who created this one?'
         },
         createdAt: {
-            Type: Date,
+            type: Date,
             default: Date.now,
             get: (createdVal) => dateFormat(createdVal)
         }
@@ -29,7 +29,7 @@ const ReactionSchema = new Schema(
             getters: true
         }
     }
-);s
+);
 
 const ThoughtSchema = new Schema(
     {
