@@ -1,6 +1,7 @@
 const { Thought, User } = require('../models');
 
 
+
 const thoughtController = {
 
     getAllThoughts(req, res) {
@@ -71,7 +72,7 @@ const thoughtController = {
     },
 
     createReaction(req, res) {
-        Thought.findOneAndUpdate({ _id: req.params.id }, { $push: { reactions: req.body } }, { new: true })
+        Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $push: { reactions: req.body } }, { new: true })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
                     res.status(404).json({ message: 'No thought found with this id!'});
@@ -86,7 +87,7 @@ const thoughtController = {
     },
 
     deleteReaction(req, res) {
-        Thought.findOneAndUpdate({ _id: req.params.id }, {$pull: {reactions: req.params.reactionId } }, { new: true })
+        Thought.findOneAndUpdate({ _id: req.params.thoughtId }, {$pull: {reactions: { reactionId: req.body.reactionId } } }, { new: true })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
                     res.status(404).json({ message: 'No thought found with this id!'});
